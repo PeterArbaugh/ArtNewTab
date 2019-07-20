@@ -27,6 +27,47 @@ a:link {
 a:visited {
 	text-decoration: none;
 }
+
+#details {
+  position: fixed;
+  top: 50px;
+  left: 50px;
+  background: #323232;
+  border-radius: 4px;
+  width: 200px;
+}
+
+#details div.icon {
+  width: 54px;
+  height: 54px;
+  background-image: url("icon/InfoSolid.svg");
+  background-repeat: no-repeat;
+  margin: 5px 10px;
+}
+
+.detail-content ul{
+  padding-left: 10px;
+  font-size: 14px;
+  font-weight: normal;
+  margin-top: 0;
+}
+
+.detail-content ul li {
+  padding: 10px 40px 10px 0;
+}
+
+#details.hidden {
+  background: none;
+}
+
+#details.hidden .icon {
+  background-image: url("icon/InfoSubtract.svg")
+}
+
+#details.hidden .detail-content {
+  opacity: 0;
+}
+
 #metadata {
     position: fixed;
     bottom: 0px;
@@ -37,13 +78,13 @@ ul {
   list-style: none;
   float: left;
 }
-li {
+#metadata li {
   display: inline-block;
   padding:2px 22px;
   font-size: 14px;
 }
 
-li:last-child {
+#metadata li:last-child {
   display: none;
 }
 
@@ -94,13 +135,20 @@ li:last-child {
 <body text="#FFFFFF" link="#FFFFFF" vlink="#FFFFFF" alink="#F5F5F5">
     <!--<div class="lds-ripple"><div></div><div></div></div>-->
     <div id="content"></div>
+    <div id="details">
+      <div class="icon"></div>
+      <div class="detail-content">
+        <ul>
+            <li><span id="artist"></span></li>
+            <li><span id="date"></span></li> 
+            <li><span id="place"></span></li>
+        </ul>
+      </div>
+      </div>
+    </div>
     <div id="metadata">
       <ul>
           <li> <a id="titleAnchor" href="https://www.metmuseum.org/art/collection" target="_blank"></a> </li>
-          <!--
-          <li><span id="artist"></span></li>
-          <li><span id="date"></span> <span id="place"></span></li>
-          -->
           <li><a href="https://www.metmuseum.org/art/collection" target="_blank">The Metropolitan Museum of Art</a></li>
       </ul>
       <p><a id="museum" href="https://www.metmuseum.org/art/collection" target="_blank">The Metropolitan Museum of Art</a></p>

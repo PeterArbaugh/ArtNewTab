@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="52px" viewBox="0 0 50 52" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>Info - solid letter</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Info---solid-letter" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle id="Oval" stroke="#FFFFFF" fill="#323232" cx="25" cy="26" r="25"></circle>
+        <text id="i" font-family="AvenirNext-Italic, Avenir Next" font-size="38" font-style="italic" font-weight="normal" fill="#FFFFFF">
+            <tspan x="20.25" y="38">i</tspan>
+        </text>
+    </g>
+</svg>

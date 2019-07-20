@@ -1,9 +1,14 @@
 searchTerm = "dog";
+var detailsElem;
 
+document.addEventListener("DOMContentLoaded", function(){
+  // Handler when the DOM is fully loaded
+  detailsElem = document.getElementById("details");
 
-document.addEventListener(WheelEvent, (evt) => {
-    console.log("scroll");
-  }, { capture: false, passive: true})
+  detailsElem.addEventListener("mouseover", function(){
+    // show details
+  });
+});
 
 // simple random integer definition
 function getRandomInt(max) {
