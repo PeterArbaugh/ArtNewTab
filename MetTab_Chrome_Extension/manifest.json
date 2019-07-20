@@ -7,6 +7,6 @@
   "incognito": "split",
 
   "chrome_url_overrides": {
-    "newtab": "random.html"
+    "newtab": "newtab.html"
   }
 }

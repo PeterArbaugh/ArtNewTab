@@ -1,5 +1,10 @@
 searchTerm = "dog";
 
+
+document.addEventListener(WheelEvent, (evt) => {
+    console.log("scroll");
+  }, { capture: false, passive: true})
+
 // simple random integer definition
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
@@ -23,14 +28,13 @@ fetch('https://collectionapi.metmuseum.org/public/collection/v1/search?q=cat+dog
         return response.json();
     })
     .then(function(item){
-        //console.log(item.primaryImage);
-        //console.log(item.title);
-        //console.log(item.objectDate);
 
         // grab the DOM elements
         var htmlElem = document.querySelector("html");
         var titleElem = document.querySelector("#titleAnchor");
-        var dateElem = document.querySelector("h2");
+        var artistElem = document.querySelector("#artist");
+        var dateElem = document.querySelector("#date");
+        var placeElem = document.querySelector("#place");
 
         // find the image size
         // via https://stackoverflow.com/questions/6575159/get-image-dimensions-with-javascript-before-image-has-fully-loaded
@@ -66,12 +70,12 @@ fetch('https://collectionapi.metmuseum.org/public/collection/v1/search?q=cat+dog
         
         titleElem.innerHTML = item.title;
         titleElem.href = item.objectURL;
+        artistElem.innerHTML = item.artistDisplayName;
         dateElem.innerHTML = item.objectDate;
+        placeElem.innerHTML = item.country;
         
     });
   });
-
-
 // select random object id
 
 // extract title, web link, date, image link, artist, medium, (period/culture??)

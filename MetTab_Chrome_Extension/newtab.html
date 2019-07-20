@@ -1,7 +1,6 @@
 <html>
 <title>New Tab</title>
-<script src= random.js>
-</script>
+<script src= script.js></script>
 <style type="text/css">
 html { 
   background: black no-repeat 0% 10% fixed;
@@ -10,44 +9,50 @@ html {
   -moz-background-size: 100%;
   -o-background-size: 100%;
   background-size: 100%;
-  padding-left: 35px;
-  padding-top: 35px;
-}
 
+}
+body {
+  margin: 0;
+}
 
 body,td,th {
 	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-style: normal;
 	font-weight: bold;
-	font-size: 24px;
 	color: #FFFFFF;
 }
-/*
 a:link {
 	text-decoration: none;
 }
 a:visited {
 	text-decoration: none;
 }
-a:hover {
-	text-decoration: none;
-}
-a:active {
-	text-decoration: none;
-}
-*/
 #metadata {
     position: fixed;
-    bottom: 15px;
+    bottom: 0px;
+    background-color: #323232;
+    width: 100%;
 }
-h1 {
-	font-size: 24px;
+ul {
+  list-style: none;
+  float: left;
 }
-h2 {
-	font-size: 14px;
+li {
+  display: inline-block;
+  padding:2px 22px;
+  font-size: 14px;
 }
-p {
-    font-size: 14px;
+
+li:last-child {
+  display: none;
+}
+
+#museum {
+  float: right;
+  font-size: 14px;
+  padding:2px 22px;
+  padding-right: 40px;
+  font-weight: normal;
 }
 
 /* Loading animation */
@@ -87,11 +92,18 @@ p {
 
 
 <body text="#FFFFFF" link="#FFFFFF" vlink="#FFFFFF" alink="#F5F5F5">
-    <div class="lds-ripple"><div></div><div></div></div>
+    <!--<div class="lds-ripple"><div></div><div></div></div>-->
+    <div id="content"></div>
     <div id="metadata">
-            <h1> <a id="titleAnchor" href="https://www.metmuseum.org/art/collection" target="_blank"></a> </h1>
-            <h2></h2>
-            <p>From the collection of <a href="https://www.metmuseum.org/art/collection" target="_blank">The Metropolitan Museum of Art</a></p>
+      <ul>
+          <li> <a id="titleAnchor" href="https://www.metmuseum.org/art/collection" target="_blank"></a> </li>
+          <!--
+          <li><span id="artist"></span></li>
+          <li><span id="date"></span> <span id="place"></span></li>
+          -->
+          <li><a href="https://www.metmuseum.org/art/collection" target="_blank">The Metropolitan Museum of Art</a></li>
+      </ul>
+      <p><a id="museum" href="https://www.metmuseum.org/art/collection" target="_blank">The Metropolitan Museum of Art</a></p>
     </div>
 </body>
 </html>
