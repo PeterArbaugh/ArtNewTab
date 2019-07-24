@@ -16,7 +16,7 @@ body {
 }
 
 body,td,th {
-	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-style: normal;
 	font-weight: bold;
 	color: #FFFFFF;
@@ -34,7 +34,7 @@ a:visited {
   left: 50px;
   background: #323232;
   border-radius: 4px;
-  width: 200px;
+  width: 225px;
 }
 
 #details div.icon {
@@ -46,14 +46,19 @@ a:visited {
 }
 
 .detail-content ul{
-  padding-left: 10px;
-  font-size: 14px;
+  padding: 0 10px;
+  font-size: 16px;
   font-weight: normal;
   margin-top: 0;
 }
 
 .detail-content ul li {
-  padding: 10px 40px 10px 0;
+  padding: 10px 10px 10px 0;
+  border-bottom: .5px solid #FFFFFF;
+}
+
+.detail-content ul li:last-of-type {
+  border: none;
 }
 
 #details.hidden {
@@ -135,13 +140,10 @@ ul {
 <body text="#FFFFFF" link="#FFFFFF" vlink="#FFFFFF" alink="#F5F5F5">
     <!--<div class="lds-ripple"><div></div><div></div></div>-->
     <div id="content"></div>
-    <div id="details">
+    <div id="details" class="hidden">
       <div class="icon"></div>
       <div class="detail-content">
-        <ul>
-            <li><span id="artist"></span></li>
-            <li><span id="date"></span></li> 
-            <li><span id="place"></span></li>
+        <ul id="detailsList">
         </ul>
       </div>
       </div>

@@ -1,4 +1,3 @@
-searchTerm = "dog";
 var detailsElem;
 
 document.addEventListener("DOMContentLoaded", function(){
@@ -6,8 +5,12 @@ document.addEventListener("DOMContentLoaded", function(){
   detailsElem = document.getElementById("details");
 
   detailsElem.addEventListener("mouseover", function(){
-    // show details
+    detailsElem.classList.remove("hidden");
   });
+
+  detailsElem.addEventListener("mouseout", function(){
+    detailsElem.classList.add("hidden");
+  })
 });
 
 // simple random integer definition
@@ -37,9 +40,8 @@ fetch('https://collectionapi.metmuseum.org/public/collection/v1/search?q=cat+dog
         // grab the DOM elements
         var htmlElem = document.querySelector("html");
         var titleElem = document.querySelector("#titleAnchor");
-        var artistElem = document.querySelector("#artist");
-        var dateElem = document.querySelector("#date");
-        var placeElem = document.querySelector("#place");
+
+        var detailsElem = document.querySelector("#detailsList");
 
         // find the image size
         // via https://stackoverflow.com/questions/6575159/get-image-dimensions-with-javascript-before-image-has-fully-loaded
@@ -72,17 +74,24 @@ fetch('https://collectionapi.metmuseum.org/public/collection/v1/search?q=cat+dog
             document.querySelector(".lds-ripple").style.display = "none";
         }
 
-        
+        // Set footer
         titleElem.innerHTML = item.title;
         titleElem.href = item.objectURL;
-        artistElem.innerHTML = item.artistDisplayName;
-        dateElem.innerHTML = item.objectDate;
-        placeElem.innerHTML = item.country;
+
+        // Set details
+
+        var details = [item.title, item.artistDisplayName, item.objectDate, item.country];
+
+        details.forEach(element => {
+          if(element != ""){
+            var li = document.createElement('li');
+            detailsElem.appendChild(li);
+            li.innerHTML += element;
+          }
+        });
         
+        var collectionLi = document.createElement('li');
+        collectionLi.innerHTML = "<a id='collectionLink' href='" + item.objectURL + "' target='_blank'><img src='icon/Link.svg' alt=''> View in collection</a>";
+        detailsElem.appendChild(collectionLi);
     });
   });
-// select random object id
-
-// extract title, web link, date, image link, artist, medium, (period/culture??)
-
-// assign extracted values to elements
