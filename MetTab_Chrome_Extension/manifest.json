@@ -6,6 +6,10 @@
   "version": "1",
   "incognito": "split",
 
+  "permissions": [
+    "storage"
+  ],
+
   "chrome_url_overrides": {
     "newtab": "newtab.html"
   }
