@@ -1,4 +1,5 @@
 var detailsElem;
+var optionsLink;
 
 document.addEventListener("DOMContentLoaded", function(){
   // Handler when the DOM is fully loaded
@@ -10,13 +11,49 @@ document.addEventListener("DOMContentLoaded", function(){
 
   detailsElem.addEventListener("mouseout", function(){
     detailsElem.classList.add("hidden");
-  })
+  });
 });
 
 // simple random integer definition
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
-  }
+  };
+
+// via stackexchange: https://stackoverflow.com/a/45129760
+// although api is only getting public domain images, need to avoid tainted canvas
+function loadImage(src, callback) {
+  var img = new Image();
+
+  img.onload = callback;
+  img.setAttribute('crossOrigin', 'anonymous'); // works for me
+
+  img.src = src;
+
+  return img;
+}
+
+
+//  via https://davidwalsh.name/convert-image-data-uri-javascript
+// convert image to data uri so it can be saved to chrome.storage
+function getDataUri(url, callback) {
+  var image = new Image();
+
+  image.onload = function () {
+    var canvas = document.createElement('canvas');
+    canvas.width = this.naturalWidth; // or 'width' if you want a special/scaled size
+    canvas.height = this.naturalHeight; // or 'height' if you want a special/scaled size
+
+    canvas.getContext('2d').drawImage(this, 0, 0);
+
+    // Get raw image data
+    // callback(canvas.toDataURL('image/png').replace(/^data:image\/(png|jpg);base64,/, ''));
+
+    // ... or get as Data URI
+    callback(canvas.toDataURL('image/jpeg'));
+    };
+
+  image.src = url;
+}
 
 // first call to Met API to get list of object IDs
 fetch('https://collectionapi.metmuseum.org/public/collection/v1/search?q=cat+dog')
@@ -36,7 +73,15 @@ fetch('https://collectionapi.metmuseum.org/public/collection/v1/search?q=cat+dog
         return response.json();
     })
     .then(function(item){
-
+      //convert image to data uri
+      /*
+      var imageUri;
+      
+      getDataUri(item.primaryImage, function(dataUri) {
+        // Do whatever you'd like with the Data URI!
+        imageUri = dataUri;
+      });
+      */
         // grab the DOM elements
         var htmlElem = document.querySelector("html");
         var titleElem = document.querySelector("#titleAnchor");
@@ -70,28 +115,68 @@ fetch('https://collectionapi.metmuseum.org/public/collection/v1/search?q=cat+dog
 
         htmlElem.style.backgroundImage = 'url('+ img.src + ')';
 
+        /*
         img.onload = function () { 
             document.querySelector(".lds-ripple").style.display = "none";
         }
-
+        */
+       
         // Set footer
-        titleElem.innerHTML = item.title;
-        titleElem.href = item.objectURL;
+        // titleElem.innerHTML = item.title;
+        // titleElem.href = item.objectURL;
 
         // Set details
 
-        var details = [item.title, item.artistDisplayName, item.objectDate, item.country];
+        var titleIcon = "icon/infoSmall.svg";
+        var nameIcon = "icon/artistName.svg";
+        var dateIcon = "icon/Date.svg";
+        var countryIcon = "icon/Globe.svg";
 
+        var details = [[titleIcon, item.title], [nameIcon, item.artistDisplayName], [dateIcon, item.objectDate], [countryIcon, item.country]];
+/*
+        if(item.title != ""){
+          var li = document.createElement('li');
+          detailsElem.appendChild(li);
+          li.innerHTML += "<img src='icon/infoSmall.svg' alt=''>";
+          li.innerHTML += item.title;
+        }
+*/
         details.forEach(element => {
-          if(element != ""){
+          if(element[1] != ""){
             var li = document.createElement('li');
             detailsElem.appendChild(li);
-            li.innerHTML += element;
+            var img = "<img class='info-icon' src='" + element[0] + "' alt=''> ";
+            var text = "<span class='obj-info'>" + element[1] + "</span>";
+            // li.innerHTML = "<img src='";
+            // li.innerHTML += element[0];
+            // li.innerHTML +=  "' alt=''> ";
+            li.innerHTML = img;
+            li.innerHTML += text;
           }
         });
-        
+
+        // This whole section needs to either live in the HTML or needs to be loaded more efficiently.
+
         var collectionLi = document.createElement('li');
-        collectionLi.innerHTML = "<a id='collectionLink' href='" + item.objectURL + "' target='_blank'><img src='icon/Link.svg' alt=''> View in collection</a>";
+        collectionLi.innerHTML = "<a id='collectionLink' href='" + item.objectURL + "' target='_blank'><img class='info-icon' src='icon/Link.svg' alt=''> <span class='obj-info'>View in collection</span></a>";
         detailsElem.appendChild(collectionLi);
+
+        var museumLi = document.createElement('li');
+        museumLi.innerHTML = "<a id=''  href='https://metmuseum.org' target='_blank'><img class='info-icon' src='icon/Museum.svg' alt=''> <span class='obj-info'>The Met Museum</span></a>";
+        detailsElem.appendChild(museumLi);
+
+        var settingsLi = document.createElement('li');
+        settingsLi.innerHTML = "<a id='options'  href='#'><img class='info-icon' src='icon/Settings.svg' alt=''> <span class='obj-info'>Options</span></a>";
+        detailsElem.appendChild(settingsLi);
+
+        optionsLink = document.getElementById("options");
+
+        optionsLink.addEventListener("click", function(){
+          if (chrome.runtime.openOptionsPage) {
+            chrome.runtime.openOptionsPage();
+          } else {
+            window.open(chrome.runtime.getURL('options.html'));
+          }
+        });
     });
   });
