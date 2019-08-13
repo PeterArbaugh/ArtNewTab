@@ -6,11 +6,15 @@ document.addEventListener("DOMContentLoaded", function(){
   detailsElem = document.getElementById("details");
 
   detailsElem.addEventListener("mouseover", function(){
-    detailsElem.classList.remove("hidden");
+    detailsElem.classList.add("show-menu");
+    if(detailsElem.classList.contains("hide-menu")){
+      detailsElem.classList.remove("hide-menu")
+    }
   });
 
   detailsElem.addEventListener("mouseout", function(){
-    detailsElem.classList.add("hidden");
+    detailsElem.classList.remove("show-menu");
+    detailsElem.classList.add("hide-menu");
   });
 });
 
@@ -83,16 +87,31 @@ fetch('https://collectionapi.metmuseum.org/public/collection/v1/search?q=cat+dog
       });
       */
         // grab the DOM elements
-        var htmlElem = document.querySelector("html");
+        // changed to test applying image to the body
+        var htmlElem = document.querySelector("#content");
         var titleElem = document.querySelector("#titleAnchor");
 
         var detailsElem = document.querySelector("#detailsList");
+
+        function fadeIn(elem){
+          elem.style.transition = "opacity 1.5s cubic-bezier(0.390, 0.575, 0.565, 1.000)";
+          elem.style.opacity = "1";
+        }
 
         // find the image size
         // via https://stackoverflow.com/questions/6575159/get-image-dimensions-with-javascript-before-image-has-fully-loaded
         var img = document.createElement('img');
 
         img.src = item.primaryImage;
+
+        htmlElem.style.backgroundImage = 'url('+ img.src + ')';
+        htmlElem.style.opacity = "0";
+        
+        img.onload = function (){
+
+
+          fadeIn(htmlElem);
+        }
 
         var nw
         var nh
@@ -112,15 +131,57 @@ fetch('https://collectionapi.metmuseum.org/public/collection/v1/search?q=cat+dog
             }
             }
         }, 10);
-
+/*
+        // TO DO: Link up with existing CSS so the animation code is not replicated
+        // THIS WORKS
+        var objectImage = document.querySelector('#object-image');
+        objectImage.addEventListener("load", fadeIn);
+        objectImage.style.opacity = "0";
+        objectImage.src = img.src;
+       
+        function fadeIn(){
+          this.style.transition = "opacity 1.5s cubic-bezier(0.390, 0.575, 0.565, 1.000)";
+          this.style.opacity = "1";
+        }
+ /*
+        var htmlElem = document.createElement(div);
+        htmlElem.id = "content";
+        htmlElem.classList = "fade-in";
         htmlElem.style.backgroundImage = 'url('+ img.src + ')';
+        detailsElem.insertBefore(htmlElem);
 
-        /*
+       
         img.onload = function () { 
             document.querySelector(".lds-ripple").style.display = "none";
         }
-        */
+
+        function OnImageLoaded (img) {
+			alert ("The image has been loaded: " + img.src);
+		}
+
+        function PreloadImage (src) {
+            var img = new Image ();
+			img.onload = function () {OnImageLoaded (this)};
+            img.src = src;
+        }
+
+		PreloadImage ("image1.png");
+		PreloadImage ("image2.png");
+
+
+
+
+
+        
+        
        
+
+        htmlElem.style.backgroundImage = 'url('+ img.src + ')';
+        htmlElem.addEventListener("load", fadeIn);
+        htmlElem.style.opacity = "0";
+
+        */
+
         // Set footer
         // titleElem.innerHTML = item.title;
         // titleElem.href = item.objectURL;

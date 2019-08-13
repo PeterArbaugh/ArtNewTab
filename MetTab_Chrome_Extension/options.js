@@ -1,10 +1,11 @@
 var closeButton;
 
+/* 
 fetch('MetObjects.json')
     .then(res => res.json())
     .then(data => 
         console.log(data))
-     /* 
+     
     .then(function(response){
         console.log("return json");
         return response.json;
@@ -19,6 +20,11 @@ fetch('MetObjects.json')
             
     })
 */
+
+d3.csv("MetObjects.csv").then(function(data){
+    console.log(data[0]);
+});
+
 document.addEventListener("DOMContentLoaded", function(){
     closeButton = document.getElementById("close");
 

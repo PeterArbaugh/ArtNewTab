@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 56.2 (81672) - https://sketch.com -->
+<svg width="26px" height="25px" viewBox="0 0 26 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 56.3 (81716) - https://sketch.com -->
     <title>Pencil</title>
     <desc>Created with Sketch.</desc>
     <g id="Pencil" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <rect id="Rectangle" stroke="#FFFFFF" transform="translate(16.727922, 13.727922) rotate(-315.000000) translate(-16.727922, -13.727922) " x="13.2279221" y="0.227922061" width="7" height="27"></rect>
-        <polygon id="Rectangle" fill="#FFFFFF" transform="translate(5.152237, 24.885423) rotate(86.000000) translate(-5.152237, -24.885423) " points="7.5606567 21.1906858 8.78431125 28.5801597 1.52016286 26.4098805"></polygon>
+        <rect id="Rectangle" stroke="#FFFFFF" transform="translate(13.788582, 11.667262) rotate(-315.000000) translate(-13.788582, -11.667262) " x="10.2885822" y="-0.33273811" width="7" height="24"></rect>
+        <polygon id="Rectangle" fill="#FFFFFF" transform="translate(3.939097, 21.080958) rotate(86.000000) translate(-3.939097, -21.080958) " points="6.3475171 17.3862215 7.57117165 24.7756954 0.307023256 22.6054162"></polygon>
     </g>
 </svg>
