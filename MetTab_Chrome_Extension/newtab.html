@@ -51,7 +51,7 @@ a:visited {
 }
 
 .detail-content ul{
-  max-width: 30vw;
+  max-width: 25vw;
   font-size: 16px;
   font-weight: normal;
   margin: 0;
@@ -64,9 +64,22 @@ a:visited {
   align-items: center; 
 }
 
+.detail-content ul li:nth-child(-n+3) {
+  padding: 20px;
+}
+
+.detail-content ul li:nth-last-of-type(-n+3) {
+  padding: 0;
+}
+
 .detail-content ul li a {
   font-weight: bold;
   width: 100%;
+  padding: 20px;
+}
+
+.detail-content ul li a > img {
+  vertical-align: text-bottom;
 }
 
 .detail-content ul li a:hover {
