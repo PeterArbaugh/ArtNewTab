@@ -1,23 +1,6 @@
 var detailsElem;
 var optionsLink;
 
-document.addEventListener("DOMContentLoaded", function(){
-  // Handler when the DOM is fully loaded
-  detailsElem = document.getElementById("details");
-
-  detailsElem.addEventListener("mouseover", function(){
-    detailsElem.classList.add("show-menu");
-    if(detailsElem.classList.contains("hide-menu")){
-      detailsElem.classList.remove("hide-menu")
-    }
-  });
-
-  detailsElem.addEventListener("mouseout", function(){
-    detailsElem.classList.remove("show-menu");
-    detailsElem.classList.add("hide-menu");
-  });
-});
-
 // simple random integer definition
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
@@ -59,21 +42,21 @@ function getDataUri(url, callback) {
   image.src = url;
 }
 
-// first call to Met API to get list of object IDs
-fetch('https://collectionapi.metmuseum.org/public/collection/v1/search?q=cat+dog')
-  .then(function(response) {
-    return response.json();
-  })
-  // select random object from returned object ids
-  .then(function(searchResponse) {
-    console.log(searchResponse.total);  
-    console.log(getRandomInt(searchResponse.objectIDs.length));
-    var randPlace = getRandomInt(searchResponse.objectIDs.length);
-    var randID = searchResponse.objectIDs[randPlace];
+// GET MET OBJECT
+function GetMetObject(){
 
-    // second call to Met API for object details
-    fetch('https://collectionapi.metmuseum.org/public/collection/v1/objects/' + randID)
-    .then(function(response){
+  // I'm pretty sure I'm not doing this part right...
+  var ao = new Promise(function(resolve, reject){
+    chrome.storage.local.get('objList', function(data){
+    var randPlace = getRandomInt(data.objList.length);
+    console.log(data.objList[randPlace]);
+    resolve(data.objList[randPlace]); 
+  })
+});
+    ao.then(function(randID){
+      console.log("Rand ID = " + randID);
+      fetch('https://collectionapi.metmuseum.org/public/collection/v1/objects/' + randID)
+      .then(function(response){
         return response.json();
     })
     .then(function(item){
@@ -89,33 +72,33 @@ fetch('https://collectionapi.metmuseum.org/public/collection/v1/search?q=cat+dog
         // grab the DOM elements
         // changed to test applying image to the body
         var htmlElem = document.querySelector("#content");
-        var titleElem = document.querySelector("#titleAnchor");
-
+        // var titleElem = document.querySelector("#titleAnchor");
+  
         var detailsElem = document.querySelector("#detailsList");
-
+  
         function fadeIn(elem){
           elem.style.transition = "opacity 1.5s cubic-bezier(0.390, 0.575, 0.565, 1.000)";
           elem.style.opacity = "1";
         }
-
+  
         // find the image size
         // via https://stackoverflow.com/questions/6575159/get-image-dimensions-with-javascript-before-image-has-fully-loaded
         var img = document.createElement('img');
-
+  
         img.src = item.primaryImage;
-
+  
         htmlElem.style.backgroundImage = 'url('+ img.src + ')';
         htmlElem.style.opacity = "0";
         
         img.onload = function (){
-
-
+  
+  
           fadeIn(htmlElem);
         }
-
+  
         var nw
         var nh
-
+  
         var poll = setInterval(function () {
             if (img.naturalWidth) {
             clearInterval(poll);
@@ -123,7 +106,7 @@ fetch('https://collectionapi.metmuseum.org/public/collection/v1/search?q=cat+dog
             console.log(img.naturalWidth, img.naturalHeight);
             nw = img.naturalWidth;
             nh = img.naturalHeight;
-
+  
             // decide image display based on image width x height
             // default is to set the image size to 100%
             if((nw + 200) < nh){
@@ -131,77 +114,77 @@ fetch('https://collectionapi.metmuseum.org/public/collection/v1/search?q=cat+dog
             }
             }
         }, 10);
-/*
+    /*
         // TO DO: Link up with existing CSS so the animation code is not replicated
         // THIS WORKS
         var objectImage = document.querySelector('#object-image');
         objectImage.addEventListener("load", fadeIn);
         objectImage.style.opacity = "0";
         objectImage.src = img.src;
-       
+        
         function fadeIn(){
           this.style.transition = "opacity 1.5s cubic-bezier(0.390, 0.575, 0.565, 1.000)";
           this.style.opacity = "1";
         }
- /*
+    /*
         var htmlElem = document.createElement(div);
         htmlElem.id = "content";
         htmlElem.classList = "fade-in";
         htmlElem.style.backgroundImage = 'url('+ img.src + ')';
         detailsElem.insertBefore(htmlElem);
-
-       
+  
+        
         img.onload = function () { 
             document.querySelector(".lds-ripple").style.display = "none";
         }
-
+  
         function OnImageLoaded (img) {
-			alert ("The image has been loaded: " + img.src);
-		}
-
+      alert ("The image has been loaded: " + img.src);
+    }
+  
         function PreloadImage (src) {
             var img = new Image ();
-			img.onload = function () {OnImageLoaded (this)};
+      img.onload = function () {OnImageLoaded (this)};
             img.src = src;
         }
-
-		PreloadImage ("image1.png");
-		PreloadImage ("image2.png");
-
-
-
-
-
+  
+    PreloadImage ("image1.png");
+    PreloadImage ("image2.png");
+  
+  
+  
+  
+  
         
         
-       
-
+        
+  
         htmlElem.style.backgroundImage = 'url('+ img.src + ')';
         htmlElem.addEventListener("load", fadeIn);
         htmlElem.style.opacity = "0";
-
+  
         */
-
+  
         // Set footer
         // titleElem.innerHTML = item.title;
         // titleElem.href = item.objectURL;
-
+  
         // Set details
-
+  
         var titleIcon = "icon/infoSmall.svg";
         var nameIcon = "icon/artistName.svg";
         var dateIcon = "icon/Date.svg";
         var countryIcon = "icon/Globe.svg";
-
+  
         var details = [[titleIcon, item.title], [nameIcon, item.artistDisplayName], [dateIcon, item.objectDate], [countryIcon, item.country]];
-/*
+    /*
         if(item.title != ""){
           var li = document.createElement('li');
           detailsElem.appendChild(li);
           li.innerHTML += "<img src='icon/infoSmall.svg' alt=''>";
           li.innerHTML += item.title;
         }
-*/
+    */
         details.forEach(element => {
           if(element[1] != ""){
             var li = document.createElement('li');
@@ -215,23 +198,23 @@ fetch('https://collectionapi.metmuseum.org/public/collection/v1/search?q=cat+dog
             li.innerHTML += text;
           }
         });
-
+  
         // This whole section needs to either live in the HTML or needs to be loaded more efficiently.
-
+  
         var collectionLi = document.createElement('li');
         collectionLi.innerHTML = "<a id='collectionLink' href='" + item.objectURL + "' target='_blank'><img class='info-icon' src='icon/Link.svg' alt=''> <span class='obj-info'>View in collection</span></a>";
         detailsElem.appendChild(collectionLi);
-
+  
         var museumLi = document.createElement('li');
         museumLi.innerHTML = "<a id=''  href='https://metmuseum.org' target='_blank'><img class='info-icon' src='icon/Museum.svg' alt=''> <span class='obj-info'>The Met Museum</span></a>";
         detailsElem.appendChild(museumLi);
-
+  
         var settingsLi = document.createElement('li');
         settingsLi.innerHTML = "<a id='options'  href='#'><img class='info-icon' src='icon/Settings.svg' alt=''> <span class='obj-info'>Options</span></a>";
         detailsElem.appendChild(settingsLi);
-
+  
         optionsLink = document.getElementById("options");
-
+  
         optionsLink.addEventListener("click", function(){
           if (chrome.runtime.openOptionsPage) {
             chrome.runtime.openOptionsPage();
@@ -240,4 +223,26 @@ fetch('https://collectionapi.metmuseum.org/public/collection/v1/search?q=cat+dog
           }
         });
     });
+    })
+    
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+  // Handler when the DOM is fully loaded
+  detailsElem = document.getElementById("details");
+
+  detailsElem.addEventListener("mouseover", function(){
+    detailsElem.classList.add("show-menu");
+    if(detailsElem.classList.contains("hide-menu")){
+      detailsElem.classList.remove("hide-menu")
+    }
   });
+
+  detailsElem.addEventListener("mouseout", function(){
+    detailsElem.classList.remove("show-menu");
+    detailsElem.classList.add("hide-menu");
+  });
+
+  // Get object and object details for display:
+  GetMetObject();
+});

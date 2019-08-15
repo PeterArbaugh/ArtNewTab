@@ -138,8 +138,26 @@ ul {
 
 
 <body text="#FFFFFF" link="#FFFFFF" vlink="#FFFFFF" alink="#F5F5F5">
-    <h1>Settings</h1>
-    <div><a id="close" href="#"><img src="icon/ClosePage.svg" alt="Close Settings"></a></div>
+  <div><a id="close" href="#"><img src="icon/ClosePage.svg" alt="Close Settings"></a></div>  
+  <h1>Settings</h1>
+    <div id="deptSelect">
+      <h2>Select Department</h2>
+      <p>Descriptive text</p>
+      <form>
+        <div id="department-select">
+          <input class="deptChBox" type="checkbox" name="dept" value="1" id="AmericanDecorativeArts"><label for="AmericanDecorativeArts">American Decorative Arts</label>
+          <input class="deptChBox" type="checkbox" name="dept" value="3" id="AncientNearEasternArt"><label for="AncientNearEasternArt">Ancient Near Eastern Art</label>
+          <input class="deptChBox" type="checkbox" name="dept" value="4" id="ArmsAndArmor"><label for="ArmsAndArmor">Arms and Armor</label>
+          <input class="deptChBox" type="checkbox" name="dept" value="5" id="ArtsofAOA"><label for="ArtsofAOA">Arts of Africa, Oceania, and the Americas</label>
+          <input type="button" value="Save Settings" id="dept-save-btn"><label for="dept-save-btn">Save your settings.</label>
+      </div>
+      <div id="search-object">
+        <input type="text" id="search-box" name="object-search-box" placeholder="Enter terms here..."></textarea><label for="object-search-box">Find objects by search term.</label>
+        <input type="button" value="Save Setting" id="search-save-btn">
+      </div>
+      </form>
+
+    </div>
     <script src= "options.js"></script>
 </body>
 </html>
