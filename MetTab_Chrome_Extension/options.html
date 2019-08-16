@@ -2,17 +2,9 @@
 <title>Options</title>
 
 <style type="text/css">
-html { 
-  background: black no-repeat 0% 10% fixed;
-  background-position: center; 
-  -webkit-background-size: 100%;
-  -moz-background-size: 100%;
-  -o-background-size: 100%;
-  background-size: 100%;
-
-}
 body {
-  margin: 0;
+  background: #323232 no-repeat 0% 10% fixed;
+  margin: 10vh 10vw;
 }
 
 body,td,th {
@@ -134,32 +126,129 @@ ul {
     opacity: 0;
   }
 }
+form {
+  display: flex;
+  justify-content: center;
+}
+
+form > div {
+  width: 25vw;
+  margin-right: 2.5vw;
+}
+
+#close-page{
+  float: right;
+}
 </style>
 
-
 <body text="#FFFFFF" link="#FFFFFF" vlink="#FFFFFF" alink="#F5F5F5">
-  <div><a id="close" href="#"><img src="icon/ClosePage.svg" alt="Close Settings"></a></div>  
+  <div id="close-page"><a id="close" href="#"><img src="icon/ClosePage.svg" alt="Close Options Page"></a></div>  
   <h1>Settings</h1>
-    <div id="deptSelect">
       <h2>Select Department</h2>
       <p>Descriptive text</p>
       <form>
         <div id="department-select">
-          <input class="deptChBox" type="checkbox" name="dept" value="1" id="AmericanDecorativeArts"><label for="AmericanDecorativeArts">American Decorative Arts</label>
-          <input class="deptChBox" type="checkbox" name="dept" value="3" id="AncientNearEasternArt"><label for="AncientNearEasternArt">Ancient Near Eastern Art</label>
-          <input class="deptChBox" type="checkbox" name="dept" value="4" id="ArmsAndArmor"><label for="ArmsAndArmor">Arms and Armor</label>
-          <input class="deptChBox" type="checkbox" name="dept" value="5" id="ArtsofAOA"><label for="ArtsofAOA">Arts of Africa, Oceania, and the Americas</label>
-          <input type="button" value="Save Settings" id="dept-save-btn"><label for="dept-save-btn">Save your settings.</label>
-      </div>
-      <div id="search-object">
-        <input type="text" id="search-box" name="object-search-box" placeholder="Enter terms here..."></textarea><label for="object-search-box">Find objects by search term.</label>
-        <input type="button" value="Save Setting" id="search-save-btn">
-      </div>
+          <input type="radio" class="cat-radio" name="category" id="deptRadio" value="dept">
+          <label for="deptRadio" class="cat-label">Display images by museum department</label>
+        <fieldset id="dept-fieldset">
+          <legend>Select a department</legend>
+          <ul>
+            <li>
+              <input class="deptChBox" type="checkbox" name="all" value="0" id="selectAll">
+              <label for="selectAll">All departments</label>
+            </li>
+            <li>
+              <input class="deptChBox" type="checkbox" name="dept" value="1" id="AmericanDecorativeArts">
+              <label for="AmericanDecorativeArts">American Decorative Arts</label>
+            </li>
+            <li>
+                <input class="deptChBox" type="checkbox" name="dept" value="4" id="ArmsAndArmor">
+                <label for="ArmsAndArmor">Arms and Armor</label>
+            </li>
+            <li>
+                <input class="deptChBox" type="checkbox" name="dept" value="5" id="ArtsofAOA">
+                <label for="ArtsofAOA">Arts of Africa, Oceania, and the Americas</label>
+            </li>
+            <li>
+                <input class="deptChBox" type="checkbox" name="dept" value="6" id="AsianArt">
+                <label for="AsianArt">Asian Art</label>
+              </li>
+            <li>
+                <input class="deptChBox" type="checkbox" name="dept" value="7" id="TheCloisters">
+                <label for="TheCloisters">The Cloisters</label>
+            </li>
+            <li>
+                <input class="deptChBox" type="checkbox" name="dept" value="8" id="TheCostumeInstitute">
+                <label for="TheCostumeInstitute">The Costume Institute</label>
+            </li>
+            <li>
+                <input class="deptChBox" type="checkbox" name="dept" value="9" id="DrawingsAndPrints">
+                <label for="DrawingsAndPrints">Drawings and Prints</label>
+            </li>
+            <li>
+                <input class="deptChBox" type="checkbox" name="dept" value="10" id="EgyptianArt">
+                <label for="EgyptianArt">Egyptian Art</label>
+            </li>
+            <li>
+                <input class="deptChBox" type="checkbox" name="dept" value="12" id="EuropeanSculpture">
+                <label for="EuropeanSculpture">European Sculture and Decorative Arts</label>
+            </li>
+            <li>
+                <input class="deptChBox" type="checkbox" name="dept" value="11" id="EuropeanPaintings">
+                <label for="EuropeanPaintings">European Paintings</label>
+            </li>
+            <li>
+                <input class="deptChBox" type="checkbox" name="dept" value="13" id="GreekRomanArt">
+                <label for="GreekRomanArt">Greek and Roman Art</label>
+            </li>
+            <li>
+                <input class="deptChBox" type="checkbox" name="dept" value="14" id="IslamicArt">
+                <label for="IslamicArt">Islamic Art</label>
+            </li>
+            <li>
+                <input class="deptChBox" type="checkbox" name="dept" value="15" id="RobertLehmanCollection">
+                <label for="RobertLehmanCollection">The Robert Lehman Collection</label>
+            </li>
+            <li>
+                <input class="deptChBox" type="checkbox" name="dept" value="16" id="Libraries">
+                <label for="Libraries">The Libraries</label>
+            </li>
+            <li>          
+              <input class="deptChBox" type="checkbox" name="dept" value="17" id="MedievalArt">
+              <label for="MedievalArt">Medieval Art</label>
+            </li>
+            <li>
+              <input class="deptChBox" type="checkbox" name="dept" value="18" id="MusicalInstruments">
+              <label for="MusicalInstruments">Musical Instruments</label>
+            </li>
+            <li>          
+              <input class="deptChBox" type="checkbox" name="dept" value="19" id="Photographs">
+              <label for="Photographs">Photographs</label>
+            </li>
+            <li>
+                <input class="deptChBox" type="checkbox" name="dept" value="21" id="ModernArt">
+                <label for="ModernArt">Modern Art</label>
+            </li>
+            <li>
+                <button type="button" value="Save Settings" id="dept-save-btn">Save Settings</button>
+            </li>
+        </ul>
+    </fieldset>
+  </div>
+  <div id="search-object">
+      <input type="radio" class="cat-radio" name="category" id="searchRadio" value="search">
+      <label for="searchRadio" class="cat-label">Display images by search term</label>
+    <fieldset id="search-fieldset">
+      <legend>Pick objects by search</legend>
+        <p><input type="text" id="search-box" name="object-search-box" placeholder="Enter terms here..."></textarea></p>
+        <p><label for="object-search-box">Find objects by search term.</label></p>
+        <p><button type="button" value="Save Setting" id="search-save-btn">Save search settings</button></p>
+    </fieldset>
+  </div>
+  <div id="history-placeholder"></div>
       </form>
-
     </div>
     <script src= "pd.js"></script>
     <script src= "options.js"></script>
 </body>
 </html>
-
