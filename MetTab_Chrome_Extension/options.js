@@ -19,7 +19,6 @@ function getDepts(){
         }
     };
 
-    console.log(aDepts);
     var deptString = "";
     for(j = 0; j<aDepts.length; j++){
         if(j != aDepts.length -1){
@@ -28,7 +27,6 @@ function getDepts(){
             deptString += aDepts[j];
         }
     };
-    console.log(deptString);
     FetchObjectsByDept(deptString);
 }
 
@@ -40,8 +38,12 @@ function FetchObjectsByDept(params){
         .then(function (data){
             console.log(data.objectIDs.length);
 
-            // TO DO: Compare to list of public domain object ids, remove those which are not public domain
-            var kv_pair = {'objList': data.objectIDs};
+            return CheckPD(data.objectIDs, pdObj);
+        })
+        .then(function (result){
+            
+            var kv_pair = {'objList': result};
+
             SaveChanges(kv_pair);
         })
 }
@@ -54,11 +56,19 @@ function FetchObjectsBySearch(params){
         .then(function (data){
             console.log(data.objectIDs.length);
 
-            // TO DO: Compare to list of public domain object ids, remove those which are not public domain
-            var kv_pair = {'objList': data.objectIDs};
+            return CheckPD(data.objectIDs, pdObj);
+            
+        })
+        .then(function (result){
+            
+            var kv_pair = {'objList': result};
 
             SaveChanges(kv_pair);
         })
+}
+
+function CheckPD(objArray, pdArray){
+    return objArray.filter(item => pdArray.includes(item));
 }
 
 function SaveChanges(pair){
@@ -66,16 +76,6 @@ function SaveChanges(pair){
         console.log("Settings saved");
     });
 }
-
-// Fetch new list of objects for selected department(s), create array
-
-// Save new array to memory
-
-// Listener for changes to search
-
-// Fetch list of objects for search term, create array
-
-// Save new array to memory
 
 document.addEventListener("DOMContentLoaded", function(){
     closeButton = document.getElementById("close");
@@ -95,4 +95,3 @@ document.addEventListener("DOMContentLoaded", function(){
         FetchObjectsBySearch(searchBox.value);
     })
 });
-
