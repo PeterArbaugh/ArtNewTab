@@ -111,16 +111,23 @@ button {
 
 #dept-save-btn {
   margin-top: 10px;
-  width: 70%;
+  width: 60%;
 }
 
 /* Loading animation */
 .spinner {
-  width: 40px;
-  height: 40px;
-
+  width: 20px;
+  height: 20px;
   position: relative;
-  margin: 100px auto;
+  float: right;
+  opacity: 0;
+  transition: 0.2s all linear;
+}
+
+#dept-fieldset > ul > li:nth-child(20) > div {
+  float: none;
+  position: relative;
+  top: 5px;
 }
 
 .double-bounce1, .double-bounce2 {
@@ -250,7 +257,12 @@ button {
                 <label for="ModernArt">Modern Art</label>
             </li>
             <li>
-                <button type="button" value="Save Settings" id="dept-save-btn">Save Settings</button> <span id="deptConfirm"></span>
+                <button type="button" value="Save Settings" id="dept-save-btn">Save Settings</button> 
+                <div id="dept-spinner" class="spinner">
+                    <div class="double-bounce1"></div>
+                    <div class="double-bounce2"></div>
+                </div>
+                <span id="deptConfirm"></span>
             </li>
         </ul>
     </fieldset>
@@ -262,15 +274,17 @@ button {
     </div>
     <fieldset id="search-fieldset">
       <legend>Select objects by search term</legend>
-        <p><input type="text" id="search-box" name="object-search-box" placeholder="Enter terms here..."></textarea> <button type="button" value="Save Setting" id="search-save-btn">Save search settings</button></p>
-        <p><label for="object-search-box">Find objects by search term.</label></p>
-        <p> <span id="searchConfirm"></span></p>
-        <!--
-        <div class="spinner">
-            <div class="double-bounce1"></div>
-            <div class="double-bounce2"></div>
+        <p>
+          <input type="text" id="search-box" name="object-search-box" placeholder="Enter terms here..."></textarea> 
+          <button type="button" value="Save Setting" id="search-save-btn">Save search settings</button>
+          <div id="search-spinner" class="spinner">
+              <div class="double-bounce1"></div>
+              <div class="double-bounce2"></div>
           </div>
-          -->
+        </p>
+        <p><label for="object-search-box">Find objects by search term.</label><span id="searchConfirm">  </span></p>
+
+
     </fieldset>
   </div>
   <!--<div id="history-placeholder"></div>-->

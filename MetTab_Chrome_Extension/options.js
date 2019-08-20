@@ -57,8 +57,6 @@ function FetchObjectsByDept(params){
             return response.json();
         })
         .then(function (data){
-            console.log(data.objectIDs.length);
-
             return CheckPD(data.objectIDs, pdObj);
         })
         .then(function (result){
@@ -67,6 +65,7 @@ function FetchObjectsByDept(params){
 
             SaveChanges(kv_pair);
             SendConfirmMsgDept("Options saved!");
+            HideSpinner(deptSpinner);
         })
 }
 
@@ -82,7 +81,6 @@ function FetchObjectsBySearch(params){
         })
         .then(function (data){
             // Compare search terms with public domain list and remove anything outside of PD
-            console.log(data.objectIDs.length);
             return CheckPD(data.objectIDs, pdObj);
             
         })
@@ -92,6 +90,7 @@ function FetchObjectsBySearch(params){
 
             SaveChanges(kv_pair);
             SendConfirmMsgSearch("Options saved!")
+            HideSpinner(searchSpinner);
         })
     }
 }
@@ -140,18 +139,15 @@ function SelectAllDepts(sa){
 function CheckSavedSettings (){
     var ss = new Promise(function (resolve, reject){
         chrome.storage.local.get(['radio', 'depts', 'searchTerm'], function(data){
-            console.log(data);
             resolve(data);
         })
     })
     ss.then(function (data){
-        console.log(deptRadio.id);
         if(data.radio == deptRadio.id){
 
             deptRadio.click();
 
             for (let i = 0; i < data.depts.length; i++) {
-                console.log(data.depts[i]);
                 document.getElementById(data.depts[i]).click();
                 
             }
@@ -221,6 +217,16 @@ function SelectAllObjects() {
     SaveChanges(allDeptObjs);
 }
 
+// show loading spinner
+function ShowSpinner(elem){
+    elem.style.opacity = 1;
+}
+
+// hide loading spinner
+function HideSpinner (elem) {
+    elem.style.opacity = 0;
+}
+
 document.addEventListener("DOMContentLoaded", function(){
     closeButton = document.getElementById("close");
     deptSaveBtn = document.getElementById("dept-save-btn");
@@ -234,10 +240,11 @@ document.addEventListener("DOMContentLoaded", function(){
     selectAll = document.getElementById("selectAll");
     deptConfMsgDisplay = document.getElementById("deptConfirm");
     searchConfMsgDisplay = document.getElementById("searchConfirm");
+    deptSpinner = document.getElementById('dept-spinner');
+    searchSpinner = document.getElementById('search-spinner');
 
+    // Check last saved settings and apply to form
     CheckSavedSettings();
-
-    // Onload, want to read saved settings and apply
 
     selectAll.addEventListener("click", function(){
         SelectAllDepts(this);
@@ -258,9 +265,11 @@ document.addEventListener("DOMContentLoaded", function(){
     deptSaveBtn.addEventListener("click", function(){
         StoreCurrentOptions(false);
         getDepts();
+        ShowSpinner(deptSpinner);
     })
 
     searchButton.addEventListener("click", function(){
         FetchObjectsBySearch(searchBox.value);
+        ShowSpinner(searchSpinner);
     })
 });
