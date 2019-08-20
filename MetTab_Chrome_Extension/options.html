@@ -10,7 +10,6 @@ body {
 body,td,th {
 	font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-style: normal;
-	font-weight: bold;
 	color: #FFFFFF;
 }
 a:link {
@@ -20,112 +19,11 @@ a:visited {
 	text-decoration: none;
 }
 
-#details {
-  position: fixed;
-  top: 50px;
-  left: 50px;
-  background: #323232;
-  border-radius: 4px;
-  width: 225px;
-}
-
-#details div.icon {
-  width: 54px;
-  height: 54px;
-  background-image: url("icon/InfoSolid.svg");
-  background-repeat: no-repeat;
-  margin: 5px 10px;
-}
-
-.detail-content ul{
-  padding: 0 10px;
-  font-size: 16px;
-  font-weight: normal;
-  margin-top: 0;
-}
-
-.detail-content ul li {
-  padding: 10px 10px 10px 0;
-  border-bottom: .5px solid #FFFFFF;
-}
-
-.detail-content ul li:last-of-type {
-  border: none;
-}
-
-#details.hidden {
-  background: none;
-}
-
-#details .icon {
-  background-image: url("icon/InfoSubtract.svg")
-}
-
-#details .detail-content {
-  opacity: 0;
-}
-
-#metadata {
-    position: fixed;
-    bottom: 0px;
-    background-color: #323232;
-    width: 100%;
-}
 ul {
   list-style: none;
   float: left;
 }
-#metadata li {
-  display: inline-block;
-  padding:2px 22px;
-  font-size: 14px;
-}
 
-#metadata li:last-child {
-  display: none;
-}
-
-#museum {
-  float: right;
-  font-size: 14px;
-  padding:2px 22px;
-  padding-right: 40px;
-  font-weight: normal;
-}
-
-/* Loading animation */
-.lds-ripple {
-  display: inline-block;
-  position: relative;
-  width: 64px;
-  height: 64px;
-}
-.lds-ripple div {
-  position: absolute;
-  border: 4px solid #fff;
-  opacity: 1;
-  border-radius: 50%;
-  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
-}
-.lds-ripple div:nth-child(2) {
-  animation-delay: -0.5s;
-}
-@keyframes lds-ripple {
-  0% {
-    top: 28px;
-    left: 28px;
-    width: 0;
-    height: 0;
-    opacity: 1;
-  }
-  100% {
-    top: -1px;
-    left: -1px;
-    width: 58px;
-    height: 58px;
-    opacity: 0;
-  }
-}
 form {
   display: flex;
   justify-content: center;
