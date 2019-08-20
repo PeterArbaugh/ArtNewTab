@@ -4,10 +4,10 @@
 <style type="text/css">
 body {
   background: #323232 no-repeat 0% 10% fixed;
-  margin: 10vh 10vw;
+  margin: 5vh 10vw;
 }
 
-body,td,th {
+body,td,th, button {
 	font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-style: normal;
 	color: #FFFFFF;
@@ -17,6 +17,10 @@ a:link {
 }
 a:visited {
 	text-decoration: none;
+}
+
+label {
+  font-size: 16px;
 }
 
 ul {
@@ -30,24 +34,142 @@ form {
 }
 
 form > div {
-  width: 25vw;
+  width: 45vw;
   margin-right: 2.5vw;
 }
 
 #close-page{
   float: right;
 }
+/* Radio buttons */
+.cat-radio-cont {
+  margin-bottom: 10px;
+}
+
+input[type="radio"], input[type="checkbox"] {
+  -webkit-appearance: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+
+  border: 2px solid #fff;
+  transition: 0.2s all linear;
+  margin-right: 5px;
+
+  position: relative;
+  top: 4px;
+}
+
+input[type="radio"]:checked, input[type="checkbox"]:checked {
+  border: 8px solid #fff;
+}
+
+label.cat-label {
+  line-height: 20px;
+  align-items: center;
+}
+
+/* Checkboxes */
+
+input[type="checkbox"] {
+  border-radius: 0%;
+}
+
+input[type="checkbox"]:disabled {
+  border-color: #777;
+}
+
+#dept-fieldset:disabled, #search-fieldset:disabled {
+  color: #777;
+  transition: 0.2s all linear;
+}
+
+/* Text input */
+input[type="text"] {
+  -webkit-appearance: none;
+  width: 60%;
+  height: 30px;
+
+  border: 2px solid #fff;
+  transition: 0.2s all linear;
+  margin-right: 5px;
+}
+
+input[type="text"]:disabled {
+  background-color: #777;
+}
+
+/* Buttons */
+button {
+  width: auto;
+  height: 30px;
+  vertical-align: bottom;
+  background-color: #FFFFFF;
+  color: #232323;
+  font-size: 14;
+}
+
+#dept-save-btn {
+  margin-top: 10px;
+  width: 70%;
+}
+
+/* Loading animation */
+.spinner {
+  width: 40px;
+  height: 40px;
+
+  position: relative;
+  margin: 100px auto;
+}
+
+.double-bounce1, .double-bounce2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #ffffff;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+  -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+  animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.double-bounce2 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+@-webkit-keyframes sk-bounce {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bounce {
+  0%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 50% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
+
 </style>
 
 <body text="#FFFFFF" link="#FFFFFF" vlink="#FFFFFF" alink="#F5F5F5">
   <div id="close-page"><a id="close" href="#"><img src="icon/ClosePage.svg" alt="Close Options Page"></a></div>  
-  <h1>Settings</h1>
+  <h1>Options</h1>
       <h2>Select Department</h2>
       <p>Descriptive text</p>
       <form>
         <div id="department-select">
-          <input type="radio" class="cat-radio" name="category" id="deptRadio" value="dept">
-          <label for="deptRadio" class="cat-label">Display images by museum department</label>
+          <div class="cat-radio-cont">
+              <input type="radio" class="cat-radio" name="category" id="deptRadio" value="dept">
+              <label for="deptRadio" class="cat-label">Display images by museum department</label>
+          </div>
         <fieldset id="dept-fieldset">
           <legend>Select a department</legend>
           <ul>
@@ -134,16 +256,24 @@ form > div {
     </fieldset>
   </div>
   <div id="search-object">
-      <input type="radio" class="cat-radio" name="category" id="searchRadio" value="search">
-      <label for="searchRadio" class="cat-label">Display images by search term</label>
+    <div class="cat-radio-cont">
+        <input type="radio" class="cat-radio" name="category" id="searchRadio" value="search">
+        <label for="searchRadio" class="cat-label">Display images by search term</label>
+    </div>
     <fieldset id="search-fieldset">
-      <legend>Pick objects by search</legend>
-        <p><input type="text" id="search-box" name="object-search-box" placeholder="Enter terms here..."></textarea></p>
+      <legend>Select objects by search term</legend>
+        <p><input type="text" id="search-box" name="object-search-box" placeholder="Enter terms here..."></textarea> <button type="button" value="Save Setting" id="search-save-btn">Save search settings</button></p>
         <p><label for="object-search-box">Find objects by search term.</label></p>
-        <p><button type="button" value="Save Setting" id="search-save-btn">Save search settings</button> <span id="searchConfirm"></span></p>
+        <p> <span id="searchConfirm"></span></p>
+        <!--
+        <div class="spinner">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+          </div>
+          -->
     </fieldset>
   </div>
-  <div id="history-placeholder"></div>
+  <!--<div id="history-placeholder"></div>-->
       </form>
     </div>
     <script src= "pd.js"></script>
