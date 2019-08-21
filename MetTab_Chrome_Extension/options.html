@@ -7,11 +7,16 @@ body {
   margin: 5vh 10vw;
 }
 
-body,td,th, button {
+body,td,th, button, p {
 	font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-style: normal;
 	color: #FFFFFF;
 }
+
+p {
+  font-size: 16px;
+}
+
 a:link {
 	text-decoration: none;
 }
@@ -41,6 +46,7 @@ form > div {
 #close-page{
   float: right;
 }
+
 /* Radio buttons */
 .cat-radio-cont {
   margin-bottom: 10px;
@@ -79,7 +85,7 @@ input[type="checkbox"]:disabled {
   border-color: #777;
 }
 
-#dept-fieldset:disabled, #search-fieldset:disabled {
+#dept-fieldset:disabled, #search-fieldset:disabled, fieldset p {
   color: #777;
   transition: 0.2s all linear;
 }
@@ -97,6 +103,7 @@ input[type="text"] {
 
 input[type="text"]:disabled {
   background-color: #777;
+  border-color: #777;
 }
 
 /* Buttons */
@@ -104,14 +111,26 @@ button {
   width: auto;
   height: 30px;
   vertical-align: bottom;
-  background-color: #FFFFFF;
-  color: #232323;
+  background-color: #323232;
+  color: #fff;
   font-size: 14;
+  border-color: #fff;
+  transition: 0.2s all linear;
 }
 
 #dept-save-btn {
   margin-top: 10px;
   width: 60%;
+}
+
+button:hover, button:focus, button:active {
+  background-color: #fff;
+  color: #323232;
+}
+
+button:disabled {
+  border-color: #777777;
+  color: #777777;
 }
 
 /* Loading animation */
@@ -163,19 +182,18 @@ button {
     -webkit-transform: scale(1.0);
   }
 }
-
 </style>
 
 <body text="#FFFFFF" link="#FFFFFF" vlink="#FFFFFF" alink="#F5F5F5">
   <div id="close-page"><a id="close" href="#"><img src="icon/ClosePage.svg" alt="Close Options Page"></a></div>  
   <h1>Options</h1>
-      <h2>Select Department</h2>
-      <p>Descriptive text</p>
+      <p>Choose how you want to source the images that appear in each new tab.  Selecting a department (or multiple departments) lets the extension choose from all public domain objects in that department.</p>
+      <p>Search terms will return a random image from the results of that search.</p>
       <form>
         <div id="department-select">
           <div class="cat-radio-cont">
               <input type="radio" class="cat-radio" name="category" id="deptRadio" value="dept">
-              <label for="deptRadio" class="cat-label">Display images by museum department</label>
+              <label for="deptRadio" class="cat-label">Choose objects by museum department</label>
           </div>
         <fieldset id="dept-fieldset">
           <legend>Select a department</legend>
@@ -282,9 +300,8 @@ button {
               <div class="double-bounce2"></div>
           </div>
         </p>
-        <p><label for="object-search-box">Find objects by search term.</label><span id="searchConfirm">  </span></p>
-
-
+        <p><label for="object-search-box">Find objects by searching the collection</label><span id="searchConfirm">  </span></p>
+        <p>Finding interesting terms is more art than science. The images that return based on search results often seem disconnected from the search terms, but keep in mind that search results look at a variety of information about an object, while we only view the image.</p>
     </fieldset>
   </div>
   <!--<div id="history-placeholder"></div>-->
